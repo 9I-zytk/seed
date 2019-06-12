@@ -1,0 +1,57 @@
+.page {
+  display: flex;
+  height: 100%;
+  font-size: 14px;
+  .map-setting {
+    overflow-y: auto;
+    width: 300px;
+    background-color: #ffffff;
+    .set-block{
+      padding: 15px 15px 0 15px;
+    }
+    .set-ignore {
+      padding: 15px 0 15px 20px;
+    }
+  }
+  .map {
+    flex: 1;
+  }
+}
+.main {
+  .content-wrapper.ivu-layout-content {
+    padding: 0;
+  }
+}
+
+.pull-right {
+  float: right;
+}
+.border-top {
+  border-top: 2px #C9C9C9 solid;
+}
+.border-bottom {
+  border-bottom: 1px #C9C9C9 solid;
+}
+.login-submit {
+  width: 100%;
+}
+.tab-title {
+  padding: 0 1rem;
+  display: block;
+}
+.aside-menu .el-tabs__item {
+  padding: 0 !important;
+  width: 46px;
+}
+.aside-menu .el-tabs__header {
+  margin: 0;
+}
+.aside-menu .el-tabs__active-bar {
+  display: none;
+}
+.aside-menu .avatar .avatar-status {
+  display: block;
+}
+.message .img-avatar {
+  margin: 0;
+}
