@@ -42,6 +42,15 @@ export default {
           left: 'left',
           data: legend
         },
+        color: [
+          '#E6FAFA',
+          '#C1E5E6',
+          '#9DD0D4',
+          '#75BBC1',
+          '#4BA7AF',
+          '#00939C',
+          '#108188'
+        ],
         series: [
           {
             type: 'pie',

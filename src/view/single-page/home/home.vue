@@ -1,28 +1,29 @@
 <template>
   <div>
-    <el-row :gutter="20">
-      <!--<el-col :xs="12" :md="8" :lg="4" v-for="(infor, i) in inforCardData" :key="`infor-${i}`" style="height: 120px;padding-bottom: 10px;">-->
-        <!--<infor-card shadow :color="infor.color" :icon="infor.icon" :icon-size="36">-->
-          <!--<count-to :end="infor.count" count-class="count-style"/>-->
-          <!--<p>{{ infor.title }}</p>-->
-        <!--</infor-card>-->
-      <!--</el-col>-->
-    </el-row>
+<!--    <el-row :gutter="20">-->
+<!--      <el-col :xs="12" :md="8" :lg="4" v-for="(infor, i) in inforCardData" :key="`infor-${i}`" style="height: 120px;padding-bottom: 10px;">-->
+<!--        <infor-card shadow :color="infor.color" :icon="infor.icon" :icon-size="36">-->
+<!--          <count-to :end="infor.count" count-class="count-style"/>-->
+<!--          <p>{{ infor.title }}</p>-->
+<!--        </infor-card>-->
+<!--      </el-col>-->
+<!--    </el-row>-->
+    <div style="margin-top: 15px"></div>
     <el-row :gutter="20" style="margin-top: 10px;">
       <el-col :md="24" :lg="8" style="margin-bottom: 20px;">
         <el-card shadow>
-          <chart-pie style="height: 300px;" :value="pieData" text="用户访问来源"></chart-pie>
+          <chart-pie style="height: 360px;" :value="pieData" text="本年度新增量"></chart-pie>
         </el-card>
       </el-col>
       <el-col :md="24" :lg="16" style="margin-bottom: 20px;">
         <el-card shadow>
-          <chart-bar style="height: 300px;" :value="barData" text="每周用户活跃量"/>
+          <chart-bar style="height: 360px;" :value="barData" text="每周用户活跃量"/>
         </el-card>
       </el-col>
     </el-row>
     <el-row>
       <el-card shadow>
-        <example style="height: 310px;"/>
+        <example style="height: 400px;"/>
       </el-card>
     </el-row>
   </div>
@@ -53,11 +54,13 @@ export default {
         { title: '新增页面', icon: 'md-map', count: 14, color: '#9A66E4' }
       ],
       pieData: [
-        { value: 335, name: '直接访问' },
-        { value: 310, name: '邮件营销' },
-        { value: 234, name: '联盟广告' },
-        { value: 135, name: '视频广告' },
-        { value: 1548, name: '搜索引擎' }
+        { value: 135, name: '专利申请' },
+        { value: 210, name: '专利授权' },
+        { value: 110, name: '专利转化' },
+        { value: 23, name: '商标' },
+        { value: 335, name: '软件著作权' },
+        { value: 548, name: '获奖情况' },
+        { value: 48, name: '商业秘密' }
       ],
       barData: {
         Mon: 13253,

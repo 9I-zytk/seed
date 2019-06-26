@@ -4,8 +4,10 @@
 
 <script>
 import echarts from 'echarts'
+import tdTheme from '_c/charts/theme.json'
 import { on, off } from '@/libs/tools'
-
+const legend = ['专利', '软件著作权', '商标数', '专利转化']
+echarts.registerTheme('tdTheme', tdTheme)
 export default {
   name: 'serviceRequests',
   data () {
@@ -16,105 +18,104 @@ export default {
   methods: {
     resize () {
       this.dom.resize()
+    },
+    renderLineChart (data) {
+      this.chart = echarts.init(this.$refs.dom, 'tdTheme')
+      let colors = [
+        '#C1E5E6',
+        '#9DD0D4',
+        '#75BBC1',
+        '#4BA7AF',
+        '#00939C',
+        '#108188'
+      ]
+      let _count = data.map(function (item) {
+        return item[4]
+      })
+      let countMax = Math.max.apply(Math, _count)
+      countMax = Math.floor(countMax * 1.2)
+      let option = {
+        color: colors,
+        tooltip: {
+          trigger: 'axis'
+        },
+        xAxis: {
+          data: data.map(function (item) {
+            return item[0]
+          })
+        },
+        yAxis: [
+          {
+            type: 'value',
+            name: '数量',
+            min: 0,
+            max: countMax,
+            position: 'right',
+            axisLine: {
+              lineStyle: {
+                color: colors[0]
+              }
+            },
+            axisLabel: {
+              formatter: '{value}'
+            }
+          }
+        ],
+        dataZoom: [{
+          startValue: '2014-06'
+        }, {
+          type: 'inside'
+        }],
+        legend: {
+          date: legend
+        },
+        grid: {
+          show: false,
+          left: 20,
+          right: 30,
+          top: 30,
+          bottom: 30
+        },
+        series: []
+      }
+      legend.map((o, i) => {
+        option.series.push({
+          name: o,
+          type: 'line',
+          data: data.map(function (item) {
+            return item[i + 1]
+          })
+        })
+      })
+      this.chartOption = option
+      this.chart.setOption(option)
+    },
+    generate () {
+      let retValue = []
+      let start = 2005
+      let end = 2019
+      let date = new Date()
+      for (let i = start; i <= end; i++) {
+        for (let k = 0; k < 12; k++) {
+          if (date.getFullYear() === i && k > date.getMonth()) break
+          let years = i + '-' + (k < 10 ? '0' + k : k)
+          let _data = [
+            years,
+            Math.round(Math.random() * 20),
+            Math.round(Math.random() * 40),
+            Math.round(Math.random() * 20),
+            Math.round(Math.random() * 50)
+          ]
+          retValue.push(_data)
+        }
+      }
+      return retValue
     }
   },
   mounted () {
-    const option = {
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'cross',
-          label: {
-            backgroundColor: '#6a7985'
-          }
-        }
-      },
-      grid: {
-        top: '3%',
-        left: '1.2%',
-        right: '1%',
-        bottom: '3%',
-        containLabel: true
-      },
-      xAxis: [
-        {
-          type: 'category',
-          boundaryGap: false,
-          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-        }
-      ],
-      yAxis: [
-        {
-          type: 'value'
-        }
-      ],
-      series: [
-        {
-          name: '运营商/网络服务',
-          type: 'line',
-          stack: '总量',
-          areaStyle: {
-            normal: {
-              color: '#2d8cf0'
-            }
-          },
-          data: [120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-          name: '银行/证券',
-          type: 'line',
-          stack: '总量',
-          areaStyle: {
-            normal: {
-              color: '#10A6FF'
-            }
-          },
-          data: [257, 358, 278, 234, 290, 330, 310]
-        },
-        {
-          name: '游戏/视频',
-          type: 'line',
-          stack: '总量',
-          areaStyle: {
-            normal: {
-              color: '#0C17A6'
-            }
-          },
-          data: [379, 268, 354, 269, 310, 478, 358]
-        },
-        {
-          name: '餐饮/外卖',
-          type: 'line',
-          stack: '总量',
-          areaStyle: {
-            normal: {
-              color: '#4608A6'
-            }
-          },
-          data: [320, 332, 301, 334, 390, 330, 320]
-        },
-        {
-          name: '快递/电商',
-          type: 'line',
-          stack: '总量',
-          label: {
-            normal: {
-              show: true,
-              position: 'top'
-            }
-          },
-          areaStyle: {
-            normal: {
-              color: '#398DBF'
-            }
-          },
-          data: [820, 645, 546, 745, 872, 624, 258]
-        }
-      ]
-    }
     this.$nextTick(() => {
-      this.dom = echarts.init(this.$refs.dom)
-      this.dom.setOption(option)
+      let data = this.generate()
+      this.renderLineChart(data)
       on(window, 'resize', this.resize)
     })
   },

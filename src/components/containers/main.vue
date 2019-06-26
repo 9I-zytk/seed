@@ -3,8 +3,8 @@
     <AppHeader fixed>
       <SidebarToggler class="d-lg-none" display="md" mobile />
       <router-link class="navbar-brand" to="#">
-        <img class="navbar-brand-full" :src="maxLogo" width="89" height="25" alt="CoreUI Logo">
-        <img class="navbar-brand-minimized" :src="minLogo" width="30" height="30" alt="CoreUI Logo">
+        <img class="navbar-brand-full" :src="maxLogo" width="89" height="25" alt="Logo">
+        <img class="navbar-brand-minimized" :src="minLogo" width="30" height="30" alt="Logo">
       </router-link>
       <SidebarToggler class="d-md-down-none" display="lg" />
       <el-menu :default-active="activeIndex" mode="horizontal" class="d-md-down-none">

@@ -5,9 +5,12 @@ import store from '@/store'
 import { setToken, getToken, canTurnTo } from '@/libs/util'
 import config from '@/config'
 const { homeName } = config
-
+const baseRouter = process.env.NODE_ENV === 'production'
+  ? '/'
+  : '/'
 Vue.use(Router)
 const router = new Router({
+  base: baseRouter,
   routes,
   mode: 'history'
 })

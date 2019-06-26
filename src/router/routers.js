@@ -313,7 +313,7 @@ export default [
           icon: 'md-funnel',
           title: 'quantile'
         },
-        component: () => import('@/view/single-page/quantile')
+        component: () => import('@/view/error-page/401.vue')
       }
     ]
   },
